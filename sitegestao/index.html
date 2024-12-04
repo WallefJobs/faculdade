@@ -5,69 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GWEK Solutions</title>
     <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <header class="navbar">
-    <div class="container">
-        <div class="logo-section">
-            <img src="images/facul.jpg" alt="GWEK Banner" class="logo">
-            <span class="company-name">GWEK Solutions</span>
-        </div>
-        <nav class="nav-links">
-            <a href="#home">Página inicial</a>
-            <a href="recrutamento.html">Recrutamento</a>
-        </nav>
-    </div>
-</body>
-</html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWEK Solutions</title>
     <script src="https://unpkg.com/blip-chat-widget" type="text/javascript"></script>
     <script>
-        let blipChatInstance; // Variável para armazenar a instância do chatbot
-
         function carregarChat() {
-            // Verifica se o chatbot já foi inicializado
-            if (!blipChatInstance) {
-                blipChatInstance = new BlipChat()
-                    .withAppKey('cm90ZWFkb3Jnd2VrMToyMTg3OTk1ZC1iZDE4LTQ5M2UtOWZjMC04YTNlMmE3NmUwMjc=')
-                    .withButton({ "color": "#868686", "icon": "" }) // Configura o botão do chat
-                    .withCustomCommonUrl('https://wallef-amarok-tm50p.chat.blip.ai/');
+            const blipChat = new BlipChat()
+                .withAppKey('cm90ZWFkb3Jnd2VrMToyMTg3OTk1ZC1iZDE4LTQ5M2UtOWZjMC04YTNlMmE3NmUwMjc=')
+                .withButton({ "color": "#868686", "icon": "" })
+                .withCustomCommonUrl('https://wallef-amarok-tm50p.chat.blip.ai/');
 
-                // Evento ao carregar o chatbot: envia a mensagem prefixada e abre o chat
-                blipChatInstance.withEventHandler(BlipChat.LOAD_EVENT, function () {
-                    blipChatInstance.sendMessage({
-                        type: "text/plain",
-                        content: "Olá! Estou vindo do site e gostaria de continuar me candidatar para a vaga de Desenvolvedor Full-Stack."
-                    });
-                    blipChatInstance.open(); // Abre automaticamente o chat
+            // Adiciona o evento de carregamento para enviar mensagem inicial
+            blipChat.withEventHandler(BlipChat.LOAD_EVENT, function () {
+                blipChat.sendMessage({
+                    type: "text/plain",
+                    content: "Olá! Estou vindo do site e gostaria de continuar me candidatar para a vaga de Desenvolvedor Full-Stack."
                 });
+            });
 
-                // Evento ao fechar o chatbot: remove histórico e ícone do chat
-                blipChatInstance.withEventHandler(BlipChat.CLOSE_EVENT, function () {
-                    blipChatInstance.sendCommand({
-                        id: "clear-history",
-                        method: "set",
-                        uri: "/commands",
-                        type: "application/json",
-                        resource: { action: "clearState" }
-                    }).then(() => {
-                        console.log('Histórico do chat limpo.');
-                        blipChatInstance.destroy(); // Destrói a instância do chatbot
-                        blipChatInstance = null; // Reseta a variável para recriação
-                        console.log('Chat fechado e ícone removido.');
-                    });
+            blipChat.withEventHandler(BlipChat.CLOSE_EVENT, function () {
+                blipChat.sendCommand({
+                    id: "clear-history",
+                    method: "set",
+                    uri: "/commands",
+                    type: "application/json",
+                    resource: { action: "clearState" }
+                }).then(() => {
+                    console.log('Histórico do chat foi limpo.');
                 });
+            });
 
-                // Constrói o chatbot
-                blipChatInstance.build();
-            } else {
-                blipChatInstance.open(); // Apenas reabre o chat caso já tenha sido inicializado
-            }
-        }
+            // Constrói o widget
+            blipChat.build();
+        };
     </script>
     <style>
         /* Estilo geral */
@@ -146,7 +114,6 @@
             background-color: #333a56;
         }
     </style>
-</head>
 <body>
     <!-- Cabeçalho -->
     <div class="header">
@@ -176,6 +143,24 @@
                 <button class="button">Clique para se cadastrar</button>
             </div>
         </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWEK Solutions</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+    <div class="container">
+        <div class="logo-section">
+            <img src="images/facul.jpg" alt="GWEK Banner" class="logo">
+            <span class="company-name">GWEK Solutions</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#home">Página inicial</a>
+            <a href="recrutamento.html">Recrutamento</a>
+        </nav>
+    </div>
     </div>
 
     <footer style="text-align: center; margin-top: 20px;">
