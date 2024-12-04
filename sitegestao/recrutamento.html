@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWEK Solutions</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/blip-chat-widget" type="text/javascript"></script>
+    <script>
+        let blipChat;
+
+        function carregarChat() {
+            if (!blipChat) {
+                blipChat = new BlipChat()
+                    .withAppKey('cm90ZWFkb3Jnd2VrMToyMTg3OTk1ZC1iZDE4LTQ5M2UtOWZjMC04YTNlMmE3NmUwMjc=')
+                    .withButton({ "color": "#868686", "icon": "" })
+                    .withCustomCommonUrl('https://wallef-amarok-tm50p.chat.blip.ai/');
+
+                // Evento de carregamento: Envia mensagem prefixada
+                blipChat.withEventHandler(BlipChat.LOAD_EVENT, function () {
+                    blipChat.sendMessage({
+                        type: "text/plain",
+                        content: "Olá! Estou vindo do site e gostaria de continuar me candidatar para a vaga de Desenvolvedor Full-Stack."
+                    });
+                    blipChat.open(); // Abre automaticamente o chat ao clicar
+                });
+
+                // Evento de fechamento: Remove o ícone
+                blipChat.withEventHandler(BlipChat.CLOSE_EVENT, function () {
+                    blipChat.destroy(); // Destrói a instância
+                    blipChat = null; // Remove a referência para reiniciar
+                    console.log('Chat fechado e ícone removido.');
+                });
+
+                // Constrói o widget
+                blipChat.build();
+            } else {
+                blipChat.open(); // Apenas reabre o chat caso já exista
+            }
+        }
+    </script>
+    <style>
+        /* Estilo geral */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        /* Cabeçalho */
+        .header {
+            background-color: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        /* Conteúdo principal */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 45%;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+            margin-bottom: 20px;
+        }
+        .card h3 {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #1a1a2e;
+        }
+        .card p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .card .button {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #1a1a2e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        .card .button:hover {
+            background-color: #333a56;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <div class="header">
+        <h1>Desenvolvimento e Engenharia</h1>
+        <p>Esse setor é o coração técnico da empresa, responsável por criar, programar e manter o software. Envolve desde a construção de funcionalidades até a integração de sistemas, com foco em qualidade, desempenho e eficiência do código. Assegura que o produto funcione conforme planejado e atende às especificações técnicas.</p>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="content">
+        <div class="grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="image-placeholder">
+                    <img src="images/js.jpg" alt="Desenvolvedor Full-Stack">
+                </div>
+                <h3>Desenvolvedor Full-Stack</h3>
+                <p>Profissional com habilidades tanto em front-end quanto em back-end, responsável pelo desenvolvimento completo do software.</p>
+                <button class="button" onclick="carregarChat()">Clique para se cadastrar</button>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="image-placeholder">
+                    <img src="images/eng.jpg" alt="Engenheiro de Qualidade">
+                </div>
+                <h3>Engenheiro de Qualidade</h3>
+                <p>Garante a qualidade do software por meio de testes e validação de funcionalidades.</p>
+                <button class="button">Clique para se cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 20px;">
+        <p>&copy; 2024 GWEK Solutions. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
