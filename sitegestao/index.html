@@ -13,7 +13,7 @@
                 .withButton({ "color": "#868686", "icon": "" })
                 .withCustomCommonUrl('https://wallef-amarok-tm50p.chat.blip.ai/');
 
-            // Adiciona o evento de carregamento para enviar mensagem inicial
+            // Evento de carregamento para enviar mensagem inicial
             blipChat.withEventHandler(BlipChat.LOAD_EVENT, function () {
                 blipChat.sendMessage({
                     type: "text/plain",
@@ -21,6 +21,7 @@
                 });
             });
 
+            // Evento ao fechar o chatbot para limpar o histórico
             blipChat.withEventHandler(BlipChat.CLOSE_EVENT, function () {
                 blipChat.sendCommand({
                     id: "clear-history",
@@ -35,7 +36,7 @@
 
             // Constrói o widget
             blipChat.build();
-        };
+        }
     </script>
     <style>
         /* Estilo geral */
@@ -45,6 +46,7 @@
             padding: 0;
             background-color: #f8f9fa;
         }
+
         /* Cabeçalho */
         .header {
             background-color: #1a1a2e;
@@ -61,6 +63,7 @@
             font-size: 18px;
             line-height: 1.6;
         }
+
         /* Conteúdo principal */
         .content {
             max-width: 1200px;
@@ -113,8 +116,32 @@
         .card .button:hover {
             background-color: #333a56;
         }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #1a1a2e;
+            color: white;
+        }
     </style>
+</head>
 <body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo-section">
+                <img src="images/facul.jpg" alt="GWEK Banner" class="logo">
+                <span class="company-name">GWEK Solutions</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#home">Página inicial</a>
+                <a href="recrutamento.html">Recrutamento</a>
+            </nav>
+        </div>
+    </header>
+
     <!-- Cabeçalho -->
     <div class="header">
         <h1>Desenvolvimento e Engenharia</h1>
@@ -143,27 +170,10 @@
                 <button class="button">Clique para se cadastrar</button>
             </div>
         </div>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWEK Solutions</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <header class="navbar">
-    <div class="container">
-        <div class="logo-section">
-            <img src="images/facul.jpg" alt="GWEK Banner" class="logo">
-            <span class="company-name">GWEK Solutions</span>
-        </div>
-        <nav class="nav-links">
-            <a href="#home">Página inicial</a>
-            <a href="recrutamento.html">Recrutamento</a>
-        </nav>
-    </div>
     </div>
 
-    <footer style="text-align: center; margin-top: 20px;">
+    <!-- Rodapé -->
+    <footer>
         <p>&copy; 2024 GWEK Solutions. Todos os direitos reservados.</p>
     </footer>
 </body>
