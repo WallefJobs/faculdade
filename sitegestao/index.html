@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GWEK Solutions</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+    <div class="container">
+        <div class="logo-section">
+            <img src="images/facul.jpg" alt="GWEK Banner" class="logo">
+            <span class="company-name">GWEK Solutions</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#home">Página inicial</a>
+            <a href="recrutamento.html">Recrutamento</a>
+        </nav>
+    </div>
+</body>
+</html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWEK Solutions</title>
     <script src="https://unpkg.com/blip-chat-widget" type="text/javascript"></script>
     <script>
         let blipChatInstance; // Variável para armazenar a instância do chatbot
@@ -22,14 +43,23 @@
                         type: "text/plain",
                         content: "Olá! Estou vindo do site e gostaria de continuar me candidatar para a vaga de Desenvolvedor Full-Stack."
                     });
-                    blipChatInstance.open(); // Abre o chat automaticamente
+                    blipChatInstance.open(); // Abre automaticamente o chat
                 });
 
                 // Evento ao fechar o chatbot: remove histórico e ícone do chat
                 blipChatInstance.withEventHandler(BlipChat.CLOSE_EVENT, function () {
-                    blipChatInstance.destroy(); // Destrói a instância do chatbot
-                    blipChatInstance = null; // Reseta a variável para recriação
-                    console.log('Chat fechado, histórico apagado e ícone removido.');
+                    blipChatInstance.sendCommand({
+                        id: "clear-history",
+                        method: "set",
+                        uri: "/commands",
+                        type: "application/json",
+                        resource: { action: "clearState" }
+                    }).then(() => {
+                        console.log('Histórico do chat limpo.');
+                        blipChatInstance.destroy(); // Destrói a instância do chatbot
+                        blipChatInstance = null; // Reseta a variável para recriação
+                        console.log('Chat fechado e ícone removido.');
+                    });
                 });
 
                 // Constrói o chatbot
