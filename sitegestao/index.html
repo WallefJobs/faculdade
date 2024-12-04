@@ -6,36 +6,36 @@
     <title>GWEK Solutions</title>
     <script src="https://unpkg.com/blip-chat-widget" type="text/javascript"></script>
     <script>
-        let blipChat; // Variável para armazenar a instância do chat
+        let blipChatInstance; // Variável para armazenar a instância do chatbot
 
         function carregarChat() {
-            // Verifica se o chat já foi criado
-            if (!blipChat) {
-                blipChat = new BlipChat()
+            // Verifica se o chatbot já foi inicializado
+            if (!blipChatInstance) {
+                blipChatInstance = new BlipChat()
                     .withAppKey('cm90ZWFkb3Jnd2VrMToyMTg3OTk1ZC1iZDE4LTQ5M2UtOWZjMC04YTNlMmE3NmUwMjc=')
-                    .withButton({ "color": "#868686", "icon": "" }) // Define as cores do botão
+                    .withButton({ "color": "#868686", "icon": "" }) // Configura o botão do chat
                     .withCustomCommonUrl('https://wallef-amarok-tm50p.chat.blip.ai/');
 
-                // Evento ao carregar o chat
-                blipChat.withEventHandler(BlipChat.LOAD_EVENT, function () {
-                    blipChat.sendMessage({
+                // Evento ao carregar o chatbot: envia a mensagem prefixada e abre o chat
+                blipChatInstance.withEventHandler(BlipChat.LOAD_EVENT, function () {
+                    blipChatInstance.sendMessage({
                         type: "text/plain",
                         content: "Olá! Estou vindo do site e gostaria de continuar me candidatar para a vaga de Desenvolvedor Full-Stack."
                     });
-                    blipChat.open(); // Abre automaticamente o chat
+                    blipChatInstance.open(); // Abre o chat automaticamente
                 });
 
-                // Evento ao fechar o chat
-                blipChat.withEventHandler(BlipChat.CLOSE_EVENT, function () {
-                    blipChat.destroy(); // Destrói a instância do chat
-                    blipChat = null; // Remove a referência da instância
+                // Evento ao fechar o chatbot: remove histórico e ícone do chat
+                blipChatInstance.withEventHandler(BlipChat.CLOSE_EVENT, function () {
+                    blipChatInstance.destroy(); // Destrói a instância do chatbot
+                    blipChatInstance = null; // Reseta a variável para recriação
                     console.log('Chat fechado, histórico apagado e ícone removido.');
                 });
 
-                // Constrói o chat
-                blipChat.build();
+                // Constrói o chatbot
+                blipChatInstance.build();
             } else {
-                blipChat.open(); // Abre o chat se já foi criado
+                blipChatInstance.open(); // Apenas reabre o chat caso já tenha sido inicializado
             }
         }
     </script>
